@@ -22,8 +22,6 @@ export function Header() {
   const isDrawerOpen = useDrawerStatus() === "open";
   const route = useRoute();
 
-  console.log(route)
-
   function clearHandler() {
     setText("");
   }
@@ -41,13 +39,13 @@ export function Header() {
     <View style={styles.container}>
       <StatusBar barStyle={"light-content"} backgroundColor={"#000"} />
       <View style={styles.wrapper}>
-        <View>
+        <Pressable onPress={() => navigation.navigate("Home")}>
           <Image
             source={require("../../assets/images/QB-logo.png")}
             style={{ width: 250, height: 80 }}
             resizeMode="contain"
           />
-        </View>
+        </Pressable>
         <TouchableOpacity style={styles.cartIcon} onPress={() => navigation.getParent('RightDrawer').openDrawer()}
         >
           <FeatherIcon name="shopping-bag" size={30} color="#1235a9" />
@@ -94,13 +92,13 @@ export function Header() {
         >
           <EvilIcon name="navicon" size={40} color="#1235a9" />
         </TouchableOpacity>
-        <View>
+        <Pressable onPress={() => navigation.navigate("Home")}>
           <Image
             source={require("../../assets/images/QB-logo.png")}
             style={{ width: 250, height: 80 }}
             resizeMode="contain"
           />
-        </View>
+        </Pressable>
         <TouchableOpacity style={styles.cartIcon} onPress={() => navigation.getParent('RightDrawer').openDrawer()}a>
           <FeatherIcon name="shopping-bag" size={30} color="#1235a9" />
           <Text style={styles.itemsInCart}>0</Text>

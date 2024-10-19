@@ -1,47 +1,60 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeScreen from '../../screens/HomeScreen';
 import TabNavigation from '../tab/TabNavigation';
-import AccountScreen from '../../screens/AccountScreen';
 import CartDrawer from '../../components/Items/CartDrawer';
+import SearchDrawerLayout from '../../components/Items/SearchDrawer';
+import HomeDrawer from '../../components/Items/HomeDrawer';
 
 const Drawer = createDrawerNavigator();
+const SearchDrawer = createDrawerNavigator();
+const RightDrawer = createDrawerNavigator();
+const CatDrawer = createDrawerNavigator();
 
 export function DrawerNavigation() {
   return (
-    <Drawer.Navigator screenOptions={{ headerShown: false, drawerPosition: 'left' }}>
+    <Drawer.Navigator
+      id='HomeDrawer' 
+      screenOptions={{ headerShown: false, drawerPosition: 'left' }}
+      drawerContent={() => <HomeDrawer />}
+    >
       <Drawer.Screen name="Tabs" component={TabNavigation} />
     </Drawer.Navigator>
   )
 }
 
-const RightDrawer = createDrawerNavigator();
 
 export function DrawerNavigation2() {
   return (
     <RightDrawer.Navigator id="RightDrawer"
       screenOptions={{ drawerPosition: 'right', headerShown: false }}
-      drawerContent={() => <CartDrawer />} // Use custom drawer content
-
+      drawerContent={() => <CartDrawer />}
     >
       <RightDrawer.Screen name="HomeDrawer" component={DrawerNavigation} />
-      <RightDrawer.Screen name="Home" component={HomeScreen} />
-      <RightDrawer.Screen name="Account" component={AccountScreen} />
     </RightDrawer.Navigator>
   )
 }
 
 
-const SearchDrawer = createDrawerNavigator();
 
 export function DrawerNavigation3() {
   return (
     <SearchDrawer.Navigator id="SearchDrawer"
       screenOptions={{ drawerPosition: 'right', headerShown: false }}
-      // drawerContent={() => <CartDrawer />} // Use custom drawer content
-
-    >
+      drawerContent={() => <SearchDrawerLayout />}>
       <SearchDrawer.Screen name="RightDrawer" component={DrawerNavigation2} />
     </SearchDrawer.Navigator>
   )
+}
+
+
+
+export function CategoriesDrawerNavigation() {
+  return (
+    <CatDrawer.Navigator 
+      id='CatDrawer'
+      screenOptions={{ drawerPosition: 'left', headerShown: false }}
+    >
+      <CatDrawer.Screen name='SearchDrawer' component={DrawerNavigation3} />
+    </CatDrawer.Navigator>
+  );
 }

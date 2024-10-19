@@ -1,12 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native'
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import TabNavigation from './src/navigation/tab/TabNavigation';
+import React, { useEffect } from 'react'
 import { StackNavigation } from './src/navigation/stack/StackNavigation';
-import DrawerNavigation from './src/navigation/drawer/DrawerNavigation';
+import GlobalFont from 'react-native-global-font';
+import WorkSans from './src/assets/Fonts/WorkSans-Medium.ttf'; // Adjust the path as necessary
 
-const Stack = createNativeStackNavigator();
 export default function App() {
+  useEffect(() => {
+    GlobalFont.applyFont('Work Sans')
+  }, [])
   return (
     <NavigationContainer>
       <StackNavigation />
